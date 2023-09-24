@@ -4,16 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="146d5147-39ad-4a51-8f0c-561b2b206038" name="Changes" comment="" />
+    <list default="true" id="57c277e1-3947-4527-8b77-8b8a496a4bfe" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
+  "associatedIndex": 2
 }]]></component>
-  <component name="ProjectId" id="2Vpscyo3qrP0DxN6Tw6H99r17mJ" />
+  <component name="ProjectId" id="2VpxkSNbCsg5H2JfXdDREC7oOYc" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -27,12 +27,23 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="146d5147-39ad-4a51-8f0c-561b2b206038" name="Changes" comment="" />
-      <created>1695544439943</created>
+      <changelist id="57c277e1-3947-4527-8b77-8b8a496a4bfe" name="Changes" comment="" />
+      <created>1695546965292</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1695544439943</updated>
+      <updated>1695546965292</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>12</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
