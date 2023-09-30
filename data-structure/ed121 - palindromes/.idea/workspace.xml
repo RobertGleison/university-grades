@@ -4,16 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec7c3b9f-952e-415f-8922-c33ff539501a" name="Changes" comment="" />
+    <list default="true" id="57c277e1-3947-4527-8b77-8b8a496a4bfe" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 3
-}</component>
-  <component name="ProjectId" id="2Vq2zpWxPXo0HtLfewYE6g2CgPG" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2VpxkSNbCsg5H2JfXdDREC7oOYc" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -21,18 +21,17 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/home/robert/University/university-grades/data-structure/ed243-pizza"
+    "RunOnceActivity.ShowReadmeOnStart": "true"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ec7c3b9f-952e-415f-8922-c33ff539501a" name="Changes" comment="" />
-      <created>1695549554313</created>
+      <changelist id="57c277e1-3947-4527-8b77-8b8a496a4bfe" name="Changes" comment="" />
+      <created>1695546965292</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1695549554313</updated>
+      <updated>1695546965292</updated>
     </task>
     <servers />
   </component>
