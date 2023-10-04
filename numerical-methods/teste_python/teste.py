@@ -14,9 +14,12 @@ def calculate_serie(x, min_error):
 
     sum = (sum//min_error)*min_error
     
-    print(f"Number of terms: {n_term -1}\nSum of the series is: {sum}")
+    print(f"Sum of the series is: {sum}")
 
 calculate_serie(0.5, 10**(-9))
+
+
+print()
 
 def aprox(x,min_err):
     sum = 0
