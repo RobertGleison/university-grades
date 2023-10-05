@@ -1,21 +1,21 @@
 # #Question A
 
 
-def calculate_term(n_term):
-    return ((-1)**n_term)*(n_term/((5**n_term) + 10))
+# def calculate_term(n_term):
+#     return ((-1)**n_term)*(n_term/((5**n_term) + 10))
 
 
-def calculate_serie_a(min_error):
-    sum = 0
-    n_term = 1
-    while(abs(calculate_term(n_term)) >= min_error):
-        sum += calculate_term(n_term)
-        n_term+=1
-    #Truncate the number
-    sum = (sum//min_error) * min_error
-    print(sum)
-calculate_serie_a(5e-4)
-print()
+# def calculate_serie_a(min_error):
+#     sum = 0
+#     n_term = 1
+#     while(abs(calculate_term(n_term)) >= min_error):
+#         sum += calculate_term(n_term)
+#         n_term+=1
+#     #Truncate the number
+#     sum = (sum//min_error) * min_error
+#     print(sum)
+# calculate_serie_a(5e-4)
+# print()
 
 # #Question A - optimized
 
