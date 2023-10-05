@@ -11,7 +11,7 @@ def calculate_serie_a(min_error):
 
     #Truncate the number
     sum = (sum//min_error) * min_error
-    print(f"The value of sum is :{sum}")
+    print(sum)
 calculate_serie_a(5e-4)
 print()
 
@@ -29,6 +29,8 @@ def calculate_serie_b(min_error):
         n_term+=1
         next_term = 1/(n_term*(3**n_term))
         sum += term
+        #Truncate the number
+    sum = (sum//min_error) * min_error
     print(sum)
 
 calculate_serie_b(5e-4)
