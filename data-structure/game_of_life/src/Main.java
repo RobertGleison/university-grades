@@ -43,7 +43,20 @@ class Game {
 
 
     public void iterate() {
-
+        char m2[][] = m;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                int result = countAlive(i, j);
+                if (result < 2 || result > 2) {
+                    if (m2[i][j] == ALIVE) m2[i][j] = DEAD;
+                } else {
+                    if (result >= 2 && result < 4) {
+                        if (m2[i][j] == DEAD) m2[i][j] = ALIVE;
+                    }
+                }
+            }
+        }
+        m = m2;
     }
 
 }
