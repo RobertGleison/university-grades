@@ -1,8 +1,11 @@
 public class Main {
     public static void main(String[] args) {
+        //Test
+
         //Test ArrayListIntSet
 //        IntSet s1 = new ArrayListIntSet(100);
 //        IntSet s2 = new ArrayListIntSet(100);
+
 //
 //        for (int i=1; i<=5; i++)
 //            s1.add(i);
@@ -20,9 +23,9 @@ public class Main {
 //
 //        System.out.println("s1.equals(s2) = " + s1.equals(s2));
 //        System.out.println("s3.equals(s4) = " + s3.equals(s4));
-
+//-------------------------------------------------------------------------------------------------
         //Test BooleanArrayIntSet
-        int n = 1000000;
+        int n = 1_000_000;
         IntSet s = new BooleanArrayintSet(n);
         boolean tmp;
 
