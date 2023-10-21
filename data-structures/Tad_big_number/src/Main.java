@@ -28,36 +28,3 @@ public class Main {
 
 }
 
-class BigNumber {
-        private int[] value;
-
-        public BigNumber(String value){
-            this.value = convertArray(value);
-        }
-
-        //Convert given string to char[] and then, to int[]
-        public int[] convertArray(String value){
-            char[] charArray = value.toCharArray();
-            int[] intArray = new int[charArray.length];
-            for(int i = 0; i < charArray.length; i++) {
-                intArray[i] = charArray[i];
-            }
-            return intArray;
-        }
-
-    public boolean equals(BigNumber n){
-
-    }
-    public BigNumber add(BigNumber n) {}
-    public BigNumber multiply(BigNumber n){}
-
-    //Printing value as a String
-    public String toString(){
-            StringBuilder sb = new StringBuilder();
-            for(int i : this.value){
-                sb.append(i);
-            }
-            String result =  sb.toString();
-            return result;
-    }
-}
