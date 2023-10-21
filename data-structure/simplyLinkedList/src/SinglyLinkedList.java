@@ -7,10 +7,6 @@ public class SinglyLinkedList<T> {
         this.size = 0;
     }
 
-    public int getSize() {
-        return size;
-    }
-
     public int size() {
         return size;
     }
@@ -20,8 +16,7 @@ public class SinglyLinkedList<T> {
     }
 
     public void addFirst(T value) {
-        Node<T> newNode = new Node<>(value, first);
-        first = newNode;
+        first = new Node<>(value, first);
         size++;
     }
 
@@ -31,8 +26,7 @@ public class SinglyLinkedList<T> {
             first = newNode;
         } else {
             Node<T> curr = first;
-            while (curr.getNext() != null)
-                curr = curr.getNext();
+            while (curr.getNext() != null) curr = curr.getNext();
             curr.setNext(newNode);
         }
         size++;
@@ -61,7 +55,6 @@ public class SinglyLinkedList<T> {
         if (size == 1) {
             first = null;
         } else {
-            // Ciclo com for e uso de de size para mostrar alternativa ao while
             Node<T> curr = first;
             for (int i = 0; i < size - 2; i++)
                 curr = curr.getNext();
@@ -131,33 +124,25 @@ public class SinglyLinkedList<T> {
     }
 
     public void removeAll(T value) {
-        while (first.getValue().equals(value)) first = first.getNext();
+        if (isEmpty())  return;
+        while (first != null && first.getValue().equals(value)) {
+            first = first.getNext();
+            size--;
+        }
         Node<T> curr = first;
-        while (curr.getNext() != null) {
-            Node<T> pointer = curr.getNext();
+
+        while (curr != null && curr.getNext() != null) {
             if (curr.getNext().getValue().equals(value)) {
-                pointer = pointer.getNext();
+                curr.setNext(curr.getNext().getNext());
                 size--;
-                if(pointer == null){
-                    curr.setNext(null);
-                    size--;
-                    break;
-                }
-                while (pointer.getValue().equals(value)){
-                    pointer = pointer.getNext();
-                    size--;
-                }
-                curr.setNext(pointer);
-                continue;
+            } else {
+                curr = curr.getNext();
             }
-            curr = pointer;
         }
     }
 
-
     @Override
     public String toString() {
-
         String str = "{";
         Node<T> curr = first;
         while (curr != null) {

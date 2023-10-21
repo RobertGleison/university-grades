@@ -47,7 +47,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>9</line>
+          <line>16</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
