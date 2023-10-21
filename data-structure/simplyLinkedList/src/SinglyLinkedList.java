@@ -11,6 +11,10 @@ public class SinglyLinkedList<T> {
         return size;
     }
 
+    public int size() {
+        return size;
+    }
+
     public boolean isEmpty() {
         return (size == 0);
     }
@@ -26,10 +30,10 @@ public class SinglyLinkedList<T> {
         if (isEmpty()) {
             first = newNode;
         } else {
-            Node<T> cur = first;
-            while (cur.getNext() != null)
-                cur = cur.getNext();
-            cur.setNext(newNode);
+            Node<T> curr = first;
+            while (curr.getNext() != null)
+                curr = curr.getNext();
+            curr.setNext(newNode);
         }
         size++;
     }
@@ -58,13 +62,98 @@ public class SinglyLinkedList<T> {
             first = null;
         } else {
             // Ciclo com for e uso de de size para mostrar alternativa ao while
-            Node<T> cur = first;
-            for (int i=0; i<size-2; i++)
-                cur = cur.getNext();
-            cur.setNext(cur.getNext().getNext());
+            Node<T> curr = first;
+            for (int i = 0; i < size - 2; i++)
+                curr = curr.getNext();
+            curr.setNext(curr.getNext().getNext());
         }
         size--;
     }
+
+    public T remove(int pos) {
+        if ((size - 1) < pos || pos < 0) return null;
+        Node<T> curr = first;
+        if (pos == 0) {
+            first = first.getNext();
+            size--;
+            return curr.getValue();
+        }
+        for (int i = 0; i < pos - 1; i++) {
+            curr = curr.getNext();
+        }
+        T value = curr.getNext().getValue();
+        curr.setNext(curr.getNext().getNext());
+        size--;
+        return value;
+    }
+
+    public T get(int pos) {
+        if ((size - 1) < pos || pos < 0) return null;
+        Node<T> curr = first;
+        for (int i = 0; i < pos; i++) {
+            curr = curr.getNext();
+        }
+        return curr.getValue();
+    }
+
+    public int count(T value) {
+        Node<T> curr = first;
+        int count = 0;
+        if (curr.getValue().equals(value)) count++;
+        while (curr.getNext() != null) {
+            curr = curr.getNext();
+            if (curr.getValue().equals(value)) count++;
+        }
+        return count;
+    }
+
+    public void duplicate() {
+        if (isEmpty()) return;
+        Node<T> curr = first;
+        int initialSize = this.size;
+        for (int i = 0; i < initialSize; i++) {
+            Node<T> newNode = new Node<T>(curr.getValue(), null);
+            newNode.setNext(curr.getNext());
+            curr.setNext(newNode);
+            curr = curr.getNext().getNext();
+            this.size++;
+        }
+    }
+
+    public SinglyLinkedList<T> copy() {
+        SinglyLinkedList<T> newList = new SinglyLinkedList<T>();
+        Node<T> curr = first;
+        for (int i = 0; i < size; i++) {
+            newList.addLast(curr.getValue());
+            curr = curr.getNext();
+        }
+        return newList;
+    }
+
+    public void removeAll(T value) {
+        while (first.getValue().equals(value)) first = first.getNext();
+        Node<T> curr = first;
+        while (curr.getNext() != null) {
+            Node<T> pointer = curr.getNext();
+            if (curr.getNext().getValue().equals(value)) {
+                pointer = pointer.getNext();
+                size--;
+                if(pointer == null){
+                    curr.setNext(null);
+                    size--;
+                    break;
+                }
+                while (pointer.getValue().equals(value)){
+                    pointer = pointer.getNext();
+                    size--;
+                }
+                curr.setNext(pointer);
+                continue;
+            }
+            curr = pointer;
+        }
+    }
+
 
     @Override
     public String toString() {
