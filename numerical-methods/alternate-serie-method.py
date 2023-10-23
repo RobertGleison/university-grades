@@ -22,4 +22,5 @@ def aprox_serie_alternada(x, erro):
     print(f"Resultado: {soma}\nNumero de termos adicionados: {i}")
 aprox_serie_alternada(0.5, 1e-9)
 
+#Use this method for alternate series
  

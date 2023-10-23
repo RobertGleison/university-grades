@@ -17,3 +17,6 @@ def aprox_metodo_empirico(l,min_error):
     print(f"Resultado: {sum}\nNumero de termos adicionados: {n-1}")
 
 aprox_metodo_empirico(1/3,5e-4)
+
+
+# Use this method to calculate positive series. This is an efficient method because it not calculates every new term again, but calculates the new term as a previous term multiplied by a multiplier of the series

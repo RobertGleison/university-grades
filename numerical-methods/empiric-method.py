@@ -32,6 +32,6 @@ def aprox(erro):
     print(f"Valor aproximado de pi^2 = {soma:.5f}")  
     print(f"Erro = {abs(math.pi**2 - soma)}")
 
-
-
 aprox(1e-5)
+
+#Use this method for positive series. This is not the best method, because it calculates every new term again.

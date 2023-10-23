@@ -49,3 +49,5 @@ def bisection_method(a,b,error):
         print(f"The aproximation of root is {x}")
     else: print("There is not root in this interval")
 bisection_method(0,1,1e-5)
+
+# Use this method to reach the root of a function. But the edge points of the interval you chose must have opposite signals
