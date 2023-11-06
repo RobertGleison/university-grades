@@ -10,11 +10,11 @@ public class Node<T> {
     public Node() {
     }
 
-    public T getValue(){
+    public T getValue() {
         return value;
     }
 
-    public void setValue(T value){
+    public void setValue(T value) {
         this.value = value;
     }
 

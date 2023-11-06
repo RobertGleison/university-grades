@@ -7,20 +7,19 @@ public class CircularLinkedList<T> {
         this.last = null;
     }
 
-    public int size(){
+    public int size() {
         return size;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return (size == 0);
     }
 
-    public void addFirst(T value){
-        if(isEmpty()){
-            last = new Node<T> (value, null);
+    public void addFirst(T value) {
+        if (isEmpty()) {
+            last = new Node<T>(value, null);
             last.setNext(last);
-        }
-        else{
+        } else {
             Node<T> newNode = new Node<T>(value, last.getNext());
             last.setNext(newNode);
         }
@@ -31,46 +30,58 @@ public class CircularLinkedList<T> {
         if (isEmpty()) {
             last = new Node<T>(value, null);
             last.setNext(last);
-        }
-        else{
-            Node<T> newNode = new Node<T> (value, last.getNext());
+        } else {
+            Node<T> newNode = new Node<>(value, last.getNext());
             last.setNext(newNode);
         }
         size++;
     }
 
-    public void removeFirst(){
-        if(isEmpty()) return;
-        if(size == 1) last = null;
-        else{
+    public void removeFirst() {
+        if (isEmpty()) return;
+        if (size == 1) last = null;
+        else {
             last.setNext(last.getNext().getNext());
             size--;
         }
     }
 
-    public void removeLast(){
-        if(isEmpty()) return;
-        if(size == 1) last = null;
-        else{
+    public void removeLast() {
+        if (isEmpty()) return;
+        if (size == 1) last = null;
+        else {
             Node<T> curr = last.getNext();
-            while(curr.getNext()!= last) curr = curr.getNext();
+            while (curr.getNext() != last) curr = curr.getNext();
             curr.setNext(curr.getNext().getNext());
             last = curr;
             size--;
         }
     }
 
-    public T getFirst(){
+    public T getFirst() {
         if (isEmpty()) return null;
         return last.getNext().getValue();
     }
 
-    public T getLast(){
-        if(isEmpty()) return null;
+    public T getLast() {
+        if (isEmpty()) return null;
         return last.getValue();
     }
 
-    public void rotate(){
-        if(!isEmpty()) last = last.getNext();
+    public void rotate() {
+        if (!isEmpty()) last = last.getNext();
+    }
+
+    public String toString() {
+        String str = "";
+        if (!isEmpty()) {
+            Node<T> node = last.getNext();
+            for (int i = 0; i < size; i++) {
+                str += node.getValue();
+                if (node != last) str += ",";
+                node = node.getNext();
+            }
+        }
+        return str;
     }
 }
