@@ -21,15 +21,26 @@ public class SinglyLinkedList<T> {
     }
 
     public void addLast(T value) {
-        Node<T> newNode = new Node<T>(value, null);
-        if (isEmpty()) {
-            first = newNode;
-        } else {
-            Node<T> curr = first;
-            while (curr.getNext() != null) curr = curr.getNext();
-            curr.setNext(newNode);
+        Node<T> newNode = new Node<>(value, null);
+        if(isEmpty()) first = newNode;
+        else{
+            Node<T>  = first;
+            while(newNode.getNext() != null){
+                newNode = newNode.getNext();
+            }
         }
+
+
         size++;
+//        Node<T> newNode = new Node<T>(value, null);
+//        if (isEmpty()) {
+//            first = newNode;
+//        } else {
+//            Node<T> curr = first;
+//            while (curr.getNext() != null) curr = curr.getNext();
+//            curr.setNext(newNode);
+//        }
+//        size++;
     }
 
     public T getFirst() {
@@ -141,6 +152,29 @@ public class SinglyLinkedList<T> {
         }
     }
 
+    public boolean contains(T value){
+        if(size==0) return false;
+        else{
+            Node<T> node = first;
+            while(node.getNext()!=null){
+                if(node.getValue().equals(value)) return true;
+                node=node.getNext();
+            }
+            return false;
+    }
+
+
+
+//    public boolean contains(T value){
+//        if(isEmpty()) return false;
+//        Node<T> curr = first;
+//        while(curr.getNext()!=null){
+//            if(curr.getValue() == value) return true;
+//            curr = curr.getNext();
+//        }
+//        return false;
+//    }
+
     @Override
     public String toString() {
         String str = "{";
@@ -153,5 +187,7 @@ public class SinglyLinkedList<T> {
         str += "}";
         return str;
     }
+
+
 }
 

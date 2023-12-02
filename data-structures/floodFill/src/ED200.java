@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class FloodFill {
+public class ED200 {
     public static int rows;            // Numero de linhas
     public static int cols;            // Numero de colunas
     public static char[][] m;          // Matriz de celulas
@@ -37,7 +37,7 @@ public class FloodFill {
             int max = 0;
             for (int i = 0; i < rows; i++) {
                 for (int k = 0; k < rows; k++) {
-                    int result = FloodFill.t(i,k);
+                    int result = ED200.t(i,k);
                     max = Math.max(max, result);
                 }
             }
