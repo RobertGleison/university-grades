@@ -46,7 +46,8 @@ def bisection_method(a,b,error):
                 break
             elif (f(a) * f(x) < 0): b=x
             elif (f(a) * f(x) > 0): a=x
-        print(f"The aproximation of root is {x}")
+        x_rounded = round(x,6)
+        print(f"The aproximation of root is {x_rounded}")
     else: print("There is not root in this interval")
 bisection_method(0,1,1e-5)
 

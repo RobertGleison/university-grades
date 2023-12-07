@@ -1,0 +1,23 @@
+import math as m
+
+def f(x):
+    return m.e**x
+    
+def rectangle(f, a, b, m):
+    result = (b-a)*f(a)
+    error = ((b-a)**2)/2 * m
+    return result, error
+
+def trapezoid(f, a, b, m):
+    result = ((f(b) + f(a)) * (b-a))/2
+    error = abs(-1/12 * m * (b-a)**3)
+    return result, error
+
+def simpson_simples(f, a, b, m):
+    result = ((b-a)/6) * (f(a) + f(b) + 4*f((a+b)/2))
+    error = (((b-a)/2)**5)/90 * m
+    return result, error
+
+print(rectangle(f, 1, 2, m.e**2))
+print(trapezoid(f, 1, 2, m.e**2))
+print(simpson_simples(f, 1, 2, m.e**2))
