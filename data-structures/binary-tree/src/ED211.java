@@ -4,12 +4,8 @@ public class ED211 {
     }
 
     private static int calculateEven(BTNode<Integer> n) {
-        if (n == null) return 0;
-        int count = 0;
-        if (n.getValue() % 2 == 0) count = 1;
-        if (n.getRight() != null) count += calculateEven(n.getRight());
-        if (n.getLeft() != null) count += calculateEven(n.getLeft());
-        return count;
+        if(n==null) return 0;
+        if(n.getValue() % 2 != 0) return calculateEven(n.getRight()) + calculateEven(n.getLeft());
+        return 1 + calculateEven(n.getRight()) + calculateEven(n.getLeft());
     }
 }
-

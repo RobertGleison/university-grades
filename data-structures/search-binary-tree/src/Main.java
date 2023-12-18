@@ -1,8 +1,8 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
+
         // Ler arvore de inteiros em preorder
         Scanner in = new Scanner(System.in);
         BTree<Integer> t = LibBTree.readIntTree(in);
@@ -12,11 +12,10 @@ public class Main {
         System.out.println("depth = " + t.depth());
         System.out.println("contains(2) = " + t.contains(2));
         System.out.println("contains(3) = " + t.contains(3));
-        System.out.println(ED212.sumLevels(t));
-//        System.out.println(ED213.maxSum(t));
-//        System.out.println(t.path("DD"));
-        System.out.println(t.nodesLevel(3));
-//        System.out.println(ED211.countEven(t));
 
+        // Escrever nos da arvore seguindo varias ordens possiveis
+        t.printPreOrder();
+        System.out.println(t.numberLeafs());
+        System.out.println(t.strict());
     }
 }

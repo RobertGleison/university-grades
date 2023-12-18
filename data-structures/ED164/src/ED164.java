@@ -14,7 +14,7 @@ public class ED164 {
         }
         System.out.println(words.size());
         }
-        //Using the binary tree
+////        Using the binary tree
 //    public static void main(String[] args) {
 //        BSTree<String> words = new BSTree<>();
 //        Scanner sc = new Scanner(System.in);

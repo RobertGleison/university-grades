@@ -1,16 +1,23 @@
 public class BTree<T> {
-    private BTNode<T> root;
+    private BTNode<T> root; // raiz da arvore
+
+    // Construtor
     BTree() {
         root = null;
     }
 
+    // Getter e Setter para a raiz
     public BTNode<T> getRoot() {return root;}
     public void setRoot(BTNode<T> r) {root = r;}
 
+    // Verificar se arvore esta vazia
     public boolean isEmpty() {
         return root == null;
     }
 
+    // --------------------------------------------------------
+
+    // Numero de nos da arvore
     public int numberNodes() {
         return numberNodes(root);
     }
@@ -20,6 +27,9 @@ public class BTree<T> {
         return 1 + numberNodes(n.getLeft()) + numberNodes(n.getRight());
     }
 
+    // --------------------------------------------------------
+
+    // Altura da arvore
     public int depth() {
         return depth(root);
     }
@@ -29,16 +39,22 @@ public class BTree<T> {
         return 1 + Math.max(depth(n.getLeft()), depth(n.getRight()));
     }
 
+    // --------------------------------------------------------
+
+    // O elemento value esta contido na arvore?
     public boolean contains(T value) {
         return contains(root, value);
     }
 
     private boolean contains(BTNode<T> n, T value) {
-        if (n == null) return false;
+        if (n==null) return false;
         if (n.getValue().equals(value)) return true;
         return contains(n.getLeft(), value) || contains(n.getRight(), value);
     }
 
+    // --------------------------------------------------------
+
+    // Imprimir arvore em PreOrder
     public void printPreOrder() {
         System.out.print("PreOrder:");
         printPreOrder(root);
@@ -52,6 +68,9 @@ public class BTree<T> {
         printPreOrder(n.getRight());
     }
 
+    // --------------------------------------------------------
+
+    // Imprimir arvore em InOrder
     public void printInOrder() {
         System.out.print("InOrder:");
         printInOrder(root);
@@ -65,6 +84,9 @@ public class BTree<T> {
         printInOrder(n.getRight());
     }
 
+    // --------------------------------------------------------
+
+    // Imprimir arvore em PostOrder
     public void printPostOrder() {
         System.out.print("PostOrder:");
         printPostOrder(root);
@@ -76,55 +98,4 @@ public class BTree<T> {
         printPostOrder(n.getLeft());
         printPostOrder(n.getRight());
         System.out.print(" " + n.getValue());
-    }
-
-    //-------------------------------------------------------------------------
-    //Created by me
-
-    public int numberLeafs(){
-        return calculateLeafs(root);
-    }
-
-    private int calculateLeafs(BTNode<T> n){
-        if(n==null) return 0;
-        if(n.getLeft() == null && n.getRight()==null) return 1;
-        return calculateLeafs(n.getRight()) + calculateLeafs(n.getLeft());
-    }
-
-    public boolean strict(){
-        return isStrict(root);
-    }
-
-    private boolean isStrict(BTNode<T> n){
-        if(n==null) return true;
-        if(n.getLeft() == null && n.getRight()==null) return true;
-        if(n.getLeft() == null && n.getRight()!=null) return false;
-        if(n.getLeft() != null && n.getRight()==null) return false;
-        return (isStrict(n.getRight()) && isStrict(n.getLeft()));
-    }
-
-    public T path(String path){
-        return getPathResult(root, path);
-    }
-
-    private T getPathResult(BTNode<T> n, String path){
-        if(path.isEmpty()) path=path+" ";
-        if(path.charAt(0) == 'R') return n.getValue();
-        if(path.charAt(0) == 'E') return getPathResult(n.getLeft(), path.substring(1));
-        if(path.charAt(0) == 'D') return getPathResult(n.getRight(), path.substring(1));
-        return n.getValue();
-    }
-
-    public int nodesLevel(int k){
-        if(k==0) return 1;
-        return countNodes(k, root);
-    }
-
-    public int countNodes(int k, BTNode<T> n){
-        if(n==null) return 0;
-        if(k==0) return 1;
-        return countNodes(k-1,n.getLeft()) + countNodes(k-1, n.getRight());
-    }
-}
-
-
+    }}
