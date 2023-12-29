@@ -1,19 +1,20 @@
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
-public class BTree<T extends Comparable<? super T>> {
-    private BTNode<T> root;
+public class BSTree<T extends Comparable<? super T>> {
+    private BSTNode<T> root;
 
-    BTree() {
+    BSTree() {
         root = null;
     }
 
-    public BTNode<T> getRoot() {
+    public BSTNode<T> getRoot() {
         return root;
     }
 
-    public void setRoot(BTNode<T> r) {
+    public void setRoot(BSTNode<T> r) {
         root = r;
     }
 
@@ -29,7 +30,7 @@ public class BTree<T extends Comparable<? super T>> {
         return numberNodes(root);
     }
 
-    private int numberNodes(BTNode<T> n) {
+    private int numberNodes(BSTNode<T> n) {
         if (n == null) return 0;
         return 1 + numberNodes(n.getLeft()) + numberNodes(n.getRight());
     }
@@ -38,7 +39,7 @@ public class BTree<T extends Comparable<? super T>> {
         return contains(root, value);
     }
 
-    private boolean contains(BTNode<T> n, T value) {
+    private boolean contains(BSTNode<T> n, T value) {
         if (n == null) return false;
         if (value.compareTo(n.getValue()) < 0) // menor? sub-arvore esquerda
             return contains(n.getLeft(), value);
@@ -55,9 +56,9 @@ public class BTree<T extends Comparable<? super T>> {
         return true;
     }
 
-    private BTNode<T> insert(BTNode<T> n, T value) {
+    private BSTNode<T> insert(BSTNode<T> n, T value) {
         if (n == null)
-            return new BTNode<T>(value, null, null);
+            return new BSTNode<T>(value, null, null);
         else if (value.compareTo(n.getValue()) < 0)
             n.setLeft(insert(n.getLeft(), value));
         else if (value.compareTo(n.getValue()) > 0)
@@ -73,7 +74,7 @@ public class BTree<T extends Comparable<? super T>> {
     }
 
     // Assume-se que elemento existe (foi verificado antes)
-    private BTNode<T> remove(BTNode<T> n, T value) {
+    private BSTNode<T> remove(BSTNode<T> n, T value) {
         if (value.compareTo(n.getValue()) < 0)
             n.setLeft(remove(n.getLeft(), value));
         else if (value.compareTo(n.getValue()) > 0)
@@ -83,7 +84,7 @@ public class BTree<T extends Comparable<? super T>> {
         else if (n.getRight() == null) // Nao tem filho direito
             n = n.getLeft();
         else { // Dois fihos: ir buscar maximo do lado esquerdo
-            BTNode<T> max = n.getLeft();
+            BSTNode<T> max = n.getLeft();
             while (max.getRight() != null) max = max.getRight();
             n.setValue(max.getValue()); // Substituir valor removido
             // Apagar valor que foi para lugar do removido
@@ -97,7 +98,7 @@ public class BTree<T extends Comparable<? super T>> {
         return depth(root);
     }
 
-    private int depth(BTNode<T> n) {
+    private int depth(BSTNode<T> n) {
         if (n == null) return -1;
         return 1 + Math.max(depth(n.getLeft()), depth(n.getRight()));
     }
@@ -109,7 +110,7 @@ public class BTree<T extends Comparable<? super T>> {
         System.out.println();
     }
 
-    private void printPreOrder(BTNode<T> n) {
+    private void printPreOrder(BSTNode<T> n) {
         if (n == null) return;
         System.out.print(" " + n.getValue());
         printPreOrder(n.getLeft());
@@ -123,7 +124,7 @@ public class BTree<T extends Comparable<? super T>> {
         System.out.println();
     }
 
-    private void printInOrder(BTNode<T> n) {
+    private void printInOrder(BSTNode<T> n) {
         if (n == null) return;
         printInOrder(n.getLeft());
         System.out.print(" " + n.getValue());
@@ -137,7 +138,7 @@ public class BTree<T extends Comparable<? super T>> {
         System.out.println();
     }
 
-    private void printPostOrder(BTNode<T> n) {
+    private void printPostOrder(BSTNode<T> n) {
         if (n == null) return;
         printPostOrder(n.getLeft());
         printPostOrder(n.getRight());
@@ -148,10 +149,10 @@ public class BTree<T extends Comparable<? super T>> {
     public void printBFS() {
         System.out.print("BFS:");
 
-        Queue<BTNode<T>> q = new LinkedList<>();
+        Queue<BSTNode<T>> q = new LinkedList<>();
         q.offer(root);
         while (!q.isEmpty()) {
-            BTNode<T> cur = q.poll();
+            BSTNode<T> cur = q.poll();
             if (cur != null) {
                 System.out.print(" " + cur.getValue());
                 q.offer(cur.getLeft());
@@ -165,10 +166,10 @@ public class BTree<T extends Comparable<? super T>> {
     public void printDFS() {
         System.out.print("DFS:");
 
-        Stack<BTNode<T>> q = new Stack<>();
+        Stack<BSTNode<T>> q = new Stack<>();
         q.push(root);
         while (!q.isEmpty()) {
-            BTNode<T> cur = q.pop();
+            BSTNode<T> cur = q.pop();
             if (cur != null) {
                 System.out.print(" " + cur.getValue());
                 q.push(cur.getLeft());
@@ -182,7 +183,7 @@ public class BTree<T extends Comparable<? super T>> {
         return seekMinValue(root);
     }
 
-    private T seekMinValue(BTNode<T> n) {
+    private T seekMinValue(BSTNode<T> n) {
         if (n.getLeft() == null && n.getRight() == null) {
             return n.getValue();
         } else if (n.getLeft() == null && n.getRight() != null) {
@@ -200,7 +201,7 @@ public class BTree<T extends Comparable<? super T>> {
         return seekMaxValue(root);
     }
 
-    private T seekMaxValue(BTNode<T> n) {
+    private T seekMaxValue(BSTNode<T> n) {
         if (n.getLeft() == null && n.getRight() == null) {
             return n.getValue();
         } else if (n.getLeft() == null && n.getRight() != null) {
@@ -213,4 +214,28 @@ public class BTree<T extends Comparable<? super T>> {
             return (leftMax.compareTo(rightMax) >= 0) ? leftMax : rightMax;
         }
     }
+
+    
+//    public boolean valid(){
+//        if(root==null) return true;
+//        return isValid(root, root.getValue(), root.getValue(), 'R');
+//    }
+//
+//    public boolean isValid(BSTNode n, T min, T max, char side){
+//        min = n.getValue().compareTo(min) > 0 ? min : (T) n.getValue();
+//        max = n.getValue().compareTo(max) > 0 ? (T) n.getValue() : max;
+//        if(side == 'L'){
+//            if(n.getValue().compareTo(min)>0) return false;
+//        }
+//        if(side == 'R'){
+//            if(n.getValue().compareTo(max)>0) return false;
+//        }
+//        if(n.getLeft() == null && n.getRight() == null) return true;
+//        if(n.getLeft() == null && n.getRight() != null) return isValid(n.getRight(), min, max, 'R');
+//        if(n.getLeft() != null && n.getRight() == null) return isValid(n.getLeft(),  min, max, 'L');
+//        if(n.getLeft().getValue().compareTo(n.getValue()) == 1 || (n.getRight().getValue().compareTo(n.getValue()) == -1)){
+//            return false;
+//        }
+//        return isValid(n.getLeft(), min, max, 'L') && isValid(n.getRight(), min, max, 'R');
+//    }
 }
