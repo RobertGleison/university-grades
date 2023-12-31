@@ -22,6 +22,8 @@ class Main {
         t.printDFS();
         t.printBFS();
         System.out.println(t.countBetween(5,44));
+        System.out.println(t.maxValue());
+        System.out.println(t.minValue());
 
         // Escrever nos da arvore seguindo varias ordens possiveis
     }
