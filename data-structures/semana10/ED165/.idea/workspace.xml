@@ -4,54 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e2f4de9-99ef-45dd-8a54-0c9895325e7a" name="Changes" comment="" />
+    <list default="true" id="dd909c0c-3e96-411d-ae19-70854ee8e3ed" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 4
+  &quot;associatedIndex&quot;: 6
 }</component>
-  <component name="ProjectId" id="2Yz0KBftad2eGGdLubqCWkX992W" />
+  <component name="ProjectId" id="2aGFhtp0V5AMPWuNTq10gErzWMX" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.ED165.executor": "Run",
-    "Application.ED172.executor": "Debug",
-    "Application.Main.executor": "Run",
+    "Application.ED172.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/robert/university-grades/data-structures/semana10/search-binary-tree",
-    "settings.editor.selected.configurable": "editor.preferences.completion"
+    "last_opened_file_path": "/home/robert/university-grades/data-structures/semana10/search-binary-tree"
   }
 }]]></component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-17.0.9-corretto-17.0.9-8336523bb0d9-9b5c8e75" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9e2f4de9-99ef-45dd-8a54-0c9895325e7a" name="Changes" comment="" />
-      <created>1701513034896</created>
+      <changelist id="dd909c0c-3e96-411d-ae19-70854ee8e3ed" name="Changes" comment="" />
+      <created>1703937130535</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1701513034896</updated>
+      <updated>1703937130535</updated>
     </task>
     <servers />
   </component>
@@ -59,8 +42,8 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>23</line>
+          <url>file://$PROJECT_DIR$/src/ED172.java</url>
+          <line>7</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

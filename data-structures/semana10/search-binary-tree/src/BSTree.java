@@ -48,7 +48,6 @@ public class BSTree<T extends Comparable<? super T>> {
         return true; // se nao e menor ou maior, e porque e igual
     }
 
-
     // Devolve true se conseguiu inserir, false caso contrario
     public boolean insert(T value) {
         if (contains(value)) return false;
@@ -148,7 +147,6 @@ public class BSTree<T extends Comparable<? super T>> {
     // Imprimir arvore numa visita em largura (usando TAD Fila)
     public void printBFS() {
         System.out.print("BFS:");
-
         Queue<BSTNode<T>> q = new LinkedList<>();
         q.offer(root);
         while (!q.isEmpty()) {
@@ -165,7 +163,6 @@ public class BSTree<T extends Comparable<? super T>> {
     // Imprimir arvore numa visita em largura (usando TAD Pilha)
     public void printDFS() {
         System.out.print("DFS:");
-
         Stack<BSTNode<T>> q = new Stack<>();
         q.push(root);
         while (!q.isEmpty()) {
@@ -215,27 +212,30 @@ public class BSTree<T extends Comparable<? super T>> {
         }
     }
 
-    
-//    public boolean valid(){
-//        if(root==null) return true;
-//        return isValid(root, root.getValue(), root.getValue(), 'R');
-//    }
-//
-//    public boolean isValid(BSTNode n, T min, T max, char side){
-//        min = n.getValue().compareTo(min) > 0 ? min : (T) n.getValue();
-//        max = n.getValue().compareTo(max) > 0 ? (T) n.getValue() : max;
-//        if(side == 'L'){
-//            if(n.getValue().compareTo(min)>0) return false;
-//        }
-//        if(side == 'R'){
-//            if(n.getValue().compareTo(max)>0) return false;
-//        }
-//        if(n.getLeft() == null && n.getRight() == null) return true;
-//        if(n.getLeft() == null && n.getRight() != null) return isValid(n.getRight(), min, max, 'R');
-//        if(n.getLeft() != null && n.getRight() == null) return isValid(n.getLeft(),  min, max, 'L');
-//        if(n.getLeft().getValue().compareTo(n.getValue()) == 1 || (n.getRight().getValue().compareTo(n.getValue()) == -1)){
-//            return false;
-//        }
-//        return isValid(n.getLeft(), min, max, 'L') && isValid(n.getRight(), min, max, 'R');
-//    }
+    public int countBetween(T a, T b) {
+        if (numberNodes() < 2 || root == null) return 0;
+        return countBetweenValues(a, b, root);
+    }
+
+    private boolean isInBetween(BSTNode<T> n, T a, T b) {
+        return (n.getValue().compareTo(a) > -1 && n.getValue().compareTo(b) < 1);
+    }
+
+    private int countBetweenValues(T a, T b, BSTNode<T> n) {
+        if (n.getRight() == null && n.getLeft() == null) {
+            if (isInBetween(n, a, b)) return 1;
+            else return 0;
+        }
+        if (n.getRight() == null && n.getLeft() != null){
+            if (isInBetween(n, a, b)) return 1 + countBetweenValues(a, b, n.getLeft());
+            else return countBetweenValues(a,b,n.getLeft());}
+        if (n.getRight() != null && n.getLeft() == null){
+            if (isInBetween(n, a, b)) return 1 + countBetweenValues(a, b, n.getRight());
+            else return countBetweenValues(a,b,n.getRight());
+        }
+        else {
+            if (isInBetween(n, a, b)) return 1 + countBetweenValues(a, b, n.getRight()) + countBetweenValues(a,b,n.getLeft());
+            else return countBetweenValues(a,b,n.getRight()) + countBetweenValues(a,b,n.getLeft());
+        }
+    }
 }
