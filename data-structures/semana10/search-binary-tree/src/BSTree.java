@@ -1,3 +1,4 @@
+import javax.swing.tree.TreeNode;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -23,11 +24,11 @@ public class BSTree<T extends Comparable<? super T>> {
     }
 
     public void clear() {
-        root = null;
+        setRoot(null);
     }
 
     public int numberNodes() {
-        return numberNodes(root);
+        return numberNodes(getRoot());
     }
 
     private int numberNodes(BSTNode<T> n) {
@@ -38,7 +39,7 @@ public class BSTree<T extends Comparable<? super T>> {
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     public boolean contains(T value) {
-        return contains(root, value);
+        return contains(getRoot(), value);
     }
 
     private boolean contains(BSTNode<T> n, T value) {
@@ -55,7 +56,7 @@ public class BSTree<T extends Comparable<? super T>> {
     // Devolve true se conseguiu inserir, false caso contrario
     public boolean insert(T value) {
         if (contains(value)) return false;
-        root = insert(root, value);
+        setRoot(insert(getRoot(), value));
         return true;
     }
 
@@ -74,7 +75,7 @@ public class BSTree<T extends Comparable<? super T>> {
     // Devolve true se conseguiu remover, false caso contrario
     public boolean remove(T value) {
         if (!contains(value)) return false;
-        root = remove(root, value);
+        setRoot(remove(getRoot(), value));
         return true;
     }
 
@@ -102,7 +103,7 @@ public class BSTree<T extends Comparable<? super T>> {
 
     // Altura da arvore
     public int depth() {
-        return depth(root);
+        return depth(getRoot());
     }
 
     private int depth(BSTNode<T> n) {
@@ -115,7 +116,7 @@ public class BSTree<T extends Comparable<? super T>> {
     // Imprimir arvore em PreOrder
     public void printPreOrder() {
         System.out.print("PreOrder:");
-        printPreOrder(root);
+        printPreOrder(getRoot());
         System.out.println();
     }
 
@@ -129,7 +130,7 @@ public class BSTree<T extends Comparable<? super T>> {
     // Imprimir arvore em InOrder
     public void printInOrder() {
         System.out.print("InOrder:");
-        printInOrder(root);
+        printInOrder(getRoot());
         System.out.println();
     }
 
@@ -143,7 +144,7 @@ public class BSTree<T extends Comparable<? super T>> {
     // Imprimir arvore em PostOrder
     public void printPostOrder() {
         System.out.print("PostOrder:");
-        printPostOrder(root);
+        printPostOrder(getRoot());
         System.out.println();
     }
 
@@ -158,7 +159,7 @@ public class BSTree<T extends Comparable<? super T>> {
     public void printBFS() {
         System.out.print("BFS:");
         Queue<BSTNode<T>> q = new LinkedList<>();
-        q.offer(root);
+        q.offer(getRoot());
         while (!q.isEmpty()) {
             BSTNode<T> cur = q.poll();
             if (cur != null) {
@@ -174,7 +175,7 @@ public class BSTree<T extends Comparable<? super T>> {
     public void printDFS() {
         System.out.print("DFS:");
         Stack<BSTNode<T>> q = new Stack<>();
-        q.push(root);
+        q.push(getRoot());
         while (!q.isEmpty()) {
             BSTNode<T> cur = q.pop();
             if (cur != null) {
@@ -189,7 +190,7 @@ public class BSTree<T extends Comparable<? super T>> {
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     public T minValue() {
-        return seekMinValue(root);
+        return seekMinValue(getRoot());
     }
 
     private T seekMinValue(BSTNode<T> n) {
@@ -205,7 +206,7 @@ public class BSTree<T extends Comparable<? super T>> {
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     public T maxValue() {
-        return seekMaxValue(root);
+        return seekMaxValue(getRoot());
     }
 
     private T seekMaxValue(BSTNode<T> n) {
@@ -219,8 +220,8 @@ public class BSTree<T extends Comparable<? super T>> {
     }
 
     public int countBetween(T a, T b) {
-        if (numberNodes() < 2 || root == null) return 0;
-        return countBetweenValues(a, b, root);
+        if (numberNodes() < 2 || getRoot() == null) return 0;
+        return countBetweenValues(a, b, getRoot());
     }
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -240,5 +241,44 @@ public class BSTree<T extends Comparable<? super T>> {
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+    public boolean valid() {
+        return isValid(getRoot());
+    }
+
+    private boolean isValid(BSTNode<T> n) {
+        if (n == null || (n.getRight() == null && n.getLeft() == null)) return true;
+        if (n.getLeft() != null && n.getRight() == null) {
+            T maxValue = getMaxValue(n.getLeft());
+            if(maxValue.compareTo(n.getValue()) > 0) return false;
+            if (n.getLeft().getValue().compareTo(n.getValue()) < 0) return isValid(n.getLeft());
+            return false;
+        }
+        if (n.getLeft() == null && n.getRight() != null) {
+            T minValue = getMinValue(n.getRight());
+            if(minValue.compareTo(n.getValue()) < 0) return false;
+            if(n.getRight().getValue().compareTo(n.getValue()) > 0) return isValid(n.getRight());
+            return false;
+        }
+        if (n.getRight().getValue().compareTo(n.getValue()) < 0 || n.getLeft().getValue().compareTo(n.getValue()) > 0)
+            return false;
+        T minValue = n.getRight() == null ? n.getValue() : getMinValue(n.getRight());
+        T maxValue = n.getLeft() == null ? n.getValue() : getMaxValue(n.getLeft());
+        if (n.getValue().compareTo(maxValue) < 0 || n.getValue().compareTo(minValue) > 0) return false;
+        return isValid(n.getLeft()) && isValid(n.getRight());
+    }
+
+    private T getMinValue(BSTNode<T> n) {
+        while (n.getLeft() != null) n = n.getLeft();
+        return n.getValue();
+    }
+
+    private T getMaxValue(BSTNode<T> n) {
+        while (n.getRight() != null) n = n.getRight();
+        return n.getValue();
+    }
+
 
 }
+
+
+
