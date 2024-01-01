@@ -246,26 +246,28 @@ public class BSTree<T extends Comparable<? super T>> {
     }
 
     private boolean isValid(BSTNode<T> n) {
+        T maxValue, minValue;
         if (n == null || (n.getRight() == null && n.getLeft() == null)) return true;
+
+        //In case of right child node is null
         if (n.getLeft() != null && n.getRight() == null) {
-            T maxValue = getMaxValue(n.getLeft());
-            if(maxValue.compareTo(n.getValue()) > 0) return false;
-            if (n.getLeft().getValue().compareTo(n.getValue()) < 0) return isValid(n.getLeft());
-            return false;
-        }
+            maxValue = getMaxValue(n.getLeft());
+            if((maxValue.compareTo(n.getValue()) > 0 || !(n.getLeft().getValue().compareTo(n.getValue()) < 0))) return false;
+            return isValid(n.getLeft());}
+
+        //In case of left child node is null
         if (n.getLeft() == null && n.getRight() != null) {
-            T minValue = getMinValue(n.getRight());
-            if(minValue.compareTo(n.getValue()) < 0) return false;
-            if(n.getRight().getValue().compareTo(n.getValue()) > 0) return isValid(n.getRight());
-            return false;
-        }
-        if (n.getRight().getValue().compareTo(n.getValue()) < 0 || n.getLeft().getValue().compareTo(n.getValue()) > 0)
-            return false;
-        T minValue = n.getRight() == null ? n.getValue() : getMinValue(n.getRight());
-        T maxValue = n.getLeft() == null ? n.getValue() : getMaxValue(n.getLeft());
+            minValue = getMinValue(n.getRight());
+            if((minValue.compareTo(n.getValue()) < 0 || !(n.getRight().getValue().compareTo(n.getValue()) > 0))) return false;
+            return isValid(n.getRight());}
+
+        if (n.getRight().getValue().compareTo(n.getValue()) < 0 || n.getLeft().getValue().compareTo(n.getValue()) > 0) return false;
+
+        //In case of no child nod is null
+        minValue = n.getRight() == null ? n.getValue() : getMinValue(n.getRight());
+        maxValue = n.getLeft() == null ? n.getValue() : getMaxValue(n.getLeft());
         if (n.getValue().compareTo(maxValue) < 0 || n.getValue().compareTo(minValue) > 0) return false;
-        return isValid(n.getLeft()) && isValid(n.getRight());
-    }
+        return isValid(n.getLeft()) && isValid(n.getRight());}
 
     private T getMinValue(BSTNode<T> n) {
         while (n.getLeft() != null) n = n.getLeft();
