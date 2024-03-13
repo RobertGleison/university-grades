@@ -1,55 +1,46 @@
 import os
-from binascii import hexlify
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives import padding
 from time import time
 
 def encrypt_files(folder_name: str) -> dict:
-    keys = {}
-    encryption_times = {}
+    keys = {} # Guarda as chaves para decriptação
     for filename in os.listdir(folder_name):
-        # A cahve tem 256 bits = 32 bytes
-        key = os.urandom (32)
+        key = os.urandom (32)  # A chave tem 256 bits = 32 bytes
         cipher = Cipher(algorithms.AES(key), modes.ECB()) # Cria a cypher
-        encryptor = cipher.encryptor() 
+        encryptor = cipher.encryptor() # Cria o encriptador
         padder = padding.PKCS7(algorithms.AES.block_size).padder() # Cria o padder
-        filepath = os.path.join(folder_name, filename)
+        filepath = os.path.join(folder_name, filename) # Para cada iteração, cria o caminho do arquivo. Ex: files_aes/random_aes_512.txt
 
-        if os.path.isfile(filepath):
+        if os.path.isfile(filepath): # Verufuca se existe um arquivo com esse path
             with open(filepath, "rb") as file:
-                plaintext = file.read() 
+                plaintext = file.read() # Se existir, lê o arquivo
                 if len(plaintext) % 16 != 0: # Adiciona padding para os arquivos que não são mutiplos de 16 bits. Especificação do AES ter tamanhos em bloco de 16
-                    plaintext = padder.update(plaintext) + padder.finalize()
+                    plaintext = padder.update(plaintext) + padder.finalize() # Adiciona o padding para dar multiplo de 16
 
-            start_time = time()
-            ct = encryptor.update(plaintext) + encryptor.finalize()
-            final_time = time()
-            output_file = f"{filename}_encrypted"
+            ct = encryptor.update(plaintext) + encryptor.finalize() # Encripta a mensagem
+            temp_list = filename.split("_")
+            temp_list2 = temp_list[2].split(".")
+            output_file = f"encrypted_{temp_list[1]}_{temp_list2[0]}.txt" # Cria o nome do arquivo encrioptado
 
-            with open(os.path.join('encrypted_files_aes', output_file), "wb") as cphFile:
+            with open(os.path.join('encrypted_files_aes', output_file), "wb") as cphFile: #Acessa o caminho do arquivo criado. Ex: randim_aes_8_encripted.txt
                 cphFile.write(ct)
-        keys[output_file] = key
-
-        temp_list = filename.split("_")
-        temp_list = temp_list[2].split(".")
-        bits_size = temp_list[0]
-
-        encryption_times[bits_size] = final_time - start_time
-    return keys, encryption_times
+        keys[output_file] = key # Adiciona a chave e o arquivo no dicionario
+    return keys
 
 def decrypt_files(folder_name: str, keys: dict) -> None:
     if not os.path.exists('decrypted_files_aes'):
         os.makedirs('decrypted_files_aes')
 
     for file_name, key in keys.items():
-        cipher = Cipher(algorithms.AES(key), modes.ECB())
-        decryptor = cipher.decryptor()
+        cipher = Cipher(algorithms.AES(key), modes.ECB()) # passa a chave para o cipher
+        decryptor = cipher.decryptor() # cria um decriptador com cipher
         with open(os.path.join(folder_name, file_name), 'rb') as cypher:
             ct = cypher.read()
-            pt = decryptor.update(ct) + decryptor.finalize()
+            pt = decryptor.update(ct) + decryptor.finalize() # Decripta o texto encriptado
         
         temp_list = file_name.split("_")
-        output_file = f"decrypted_{temp_list[1]}_{temp_list[2]}"
+        output_file = f"decrypted_{temp_list[1]}_{temp_list[2]}.txt" # Cria o nome do arquivo decriptado
         with open(os.path.join('decrypted_files_aes', output_file), "wb") as cphFile:
                 cphFile.write(pt)
     
@@ -66,22 +57,9 @@ file_names = []
 if not os.path.exists('encrypted_files_aes'):
     os.makedirs('encrypted_files_aes')
 
-average_encryption_times = {}
-sums = [0 for i in range(7)] 
 
-for i in range(100):
-    keys, times = encrypt_files(files_folder)
-    sorted_times = sorted(times.items())
-
-    for index, (key, value) in enumerate(sorted_times):
-        sums[index] += value
-        
-for sum in sums:
-    sum = sum / 100
-
-for average in sums:
-    print(average)
-    # decrypt_files ('encrypted_files_aes', keys)
+keys = encrypt_files(files_folder)
+decrypt_files ('encrypted_files_aes', keys)
 
 
 
