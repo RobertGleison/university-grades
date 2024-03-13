@@ -29,15 +29,15 @@ def encrypt_files(folder_name: str) -> dict:
     return keys
 
 def decrypt_files(folder_name: str, keys: dict) -> None:
+    if not os.path.exists('decrypted_files_aes'):
+        os.makedirs('decrypted_files_aes')
+
     for file_name, key in keys.items():
         cipher = Cipher(algorithms.AES(key), modes.ECB())
         decryptor = cipher.decryptor()
         with open(os.path.join(folder_name, file_name), 'rb') as cypher:
             ct = cypher.read()
             pt = decryptor.update(ct) + decryptor.finalize()
-        
-        if not os.path.exists('decrypted_files_aes'):
-            os.makedirs('decrypted_files_aes')
         
         temp_list = file_name.split("_")
         output_file = f"decrypted_{temp_list[1]}_{temp_list[2]}"
