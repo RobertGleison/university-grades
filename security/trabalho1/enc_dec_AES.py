@@ -2,9 +2,11 @@ import os
 from binascii import hexlify
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives import padding
+from time import time
 
 def encrypt_files(folder_name: str) -> dict:
     keys = {}
+    encryption_times = {}
     for filename in os.listdir(folder_name):
         # A cahve tem 256 bits = 32 bytes
         key = os.urandom (32)
@@ -19,14 +21,21 @@ def encrypt_files(folder_name: str) -> dict:
                 if len(plaintext) % 16 != 0: # Adiciona padding para os arquivos que não são mutiplos de 16 bits. Especificação do AES ter tamanhos em bloco de 16
                     plaintext = padder.update(plaintext) + padder.finalize()
 
+            start_time = time()
             ct = encryptor.update(plaintext) + encryptor.finalize()
+            final_time = time()
             output_file = f"{filename}_encrypted"
 
             with open(os.path.join('encrypted_files_aes', output_file), "wb") as cphFile:
                 cphFile.write(ct)
-                file_names.append(output_file)
         keys[output_file] = key
-    return keys
+
+        temp_list = filename.split("_")
+        temp_list = temp_list[2].split(".")
+        bits_size = temp_list[0]
+
+        encryption_times[bits_size] = final_time - start_time
+    return keys, encryption_times
 
 def decrypt_files(folder_name: str, keys: dict) -> None:
     if not os.path.exists('decrypted_files_aes'):
@@ -43,7 +52,6 @@ def decrypt_files(folder_name: str, keys: dict) -> None:
         output_file = f"decrypted_{temp_list[1]}_{temp_list[2]}"
         with open(os.path.join('decrypted_files_aes', output_file), "wb") as cphFile:
                 cphFile.write(pt)
-                file_names.append(output_file)
     
 
 def remove_files(folder_name: str) -> None:
@@ -58,6 +66,22 @@ file_names = []
 if not os.path.exists('encrypted_files_aes'):
     os.makedirs('encrypted_files_aes')
 
-keys = encrypt_files(files_folder)
-decrypt_files ('encrypted_files_aes', keys)
+average_encryption_times = {}
+sums = [0 for i in range(7)] 
+
+for i in range(100):
+    keys, times = encrypt_files(files_folder)
+    sorted_times = sorted(times.items())
+
+    for index, (key, value) in enumerate(sorted_times):
+        sums[index] += value
+        
+for sum in sums:
+    sum = sum / 100
+
+for average in sums:
+    print(average)
+    # decrypt_files ('encrypted_files_aes', keys)
+
+
 
