@@ -1,6 +1,7 @@
 import os
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives import padding
+from cryptography.hazmat.primitives.asymmetric.rsa.generate_private import padding
 from time import time
 
 def encrypt_files(folder_name: str) -> dict:
